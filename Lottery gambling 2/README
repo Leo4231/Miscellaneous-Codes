@@ -2,5 +2,4 @@ Who doesn't like playing the lottery? You know the drill by now!
 I've written a programme that helps you pick numbers as many times as you like!
 You need to input the following: Any digits you like and what position it is!
 In Singapore, the 4D digits range from 0000 - 9999 inclusive.
-Delay added to stimulate effect of drawing numbers (can be removed)
 To fix a digit, answer Yes/No, followed by the digit and the position (1,2,3 or 4).
