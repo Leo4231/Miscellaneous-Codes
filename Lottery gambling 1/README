@@ -1,0 +1,6 @@
+Who doesn't like playing the lottery?
+I've written a programme that helps you pick numbers as many times as you like!
+You need to input the following: how many numbers you need, what is the start range and end range
+In Singapore, the TOTO digits starts from 01 and ends with 49.
+Delay added to stimulate effect of drawing numbers (can be removed)
+For lucky numbers, answer with a number or no/No
