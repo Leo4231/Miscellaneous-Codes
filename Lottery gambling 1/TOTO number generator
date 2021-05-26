@@ -1,0 +1,62 @@
+#Who doesn't like playing the lottery?
+#I've written a programme that helps you pick numbers as many times as you like!
+#You need to input the following: how many numbers you need, what is the start range and end range
+#In Singapore, the TOTO digits starts from 01 and ends with 49.
+#Delay added to stimulate effect of drawing numbers (can be removed)
+#For lucky numbers, answer with a number or no/No
+
+import random, time
+
+draws = int(input("How many numbers do you need?  "))
+start = int(input("What is the start range?  "))
+end = int(input("What is the end range?  "))
+
+number_list = []
+gen = 0
+another_one = ""
+
+fixed_num = True
+while fixed_num == True:
+    if draws == gen:
+        print("You got the numbers :D! No need for this generator!")
+        break
+    lucky_num = input("Do you have any " + another_one + "lucky number in mind?  ")
+    another_one = "other "
+    if lucky_num == "no" or lucky_num == "No":
+        break
+    if lucky_num.strip().isdigit():
+        if int(lucky_num) <= end and int(lucky_num) >= start:
+            if not int(lucky_num) in number_list:
+                number_list.append(int(lucky_num))
+                gen += 1
+            else:
+                print("You picked this auspicious number already! Try another!")
+            continue
+        else:
+            print("Number is out of range! Try again!")
+            continue
+    else:
+        print("Please enter a valid number!")
+        continue
+    
+
+while gen < draws:
+    num = random.randint(start, end)
+    if not num in number_list:
+        number_list.append(num)
+        gen += 1
+
+
+
+number_list.sort()
+
+print("And your lucky numbers are:")
+for i in number_list:
+    print(i)
+    #Edit the sleep time for as much delay as you want
+    time.sleep(0.5)
+print("Your numbers are: " + str(number_list)[1:-1] + "!")
+
+    
+    
+
