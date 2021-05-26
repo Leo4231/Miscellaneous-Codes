@@ -1,0 +1,72 @@
+#Who doesn't like playing the lottery? You know the drill by now! 
+#I've written a programme that helps you pick numbers as many times as you like!
+#You need to input the following: Any digits you like and what position it is!
+#In Singapore, the 4D digits range from 0000 - 9999 inclusive.
+#Delay added to stimulate effect of drawing numbers (can be removed)
+#To fix a digit, answer Yes/No, followed by the digit and the position (1,2,3 or 4).
+
+import random, time
+
+digit_list = [-1,-1,-1,-1]
+another_one = " "
+
+lucky_number = True
+while lucky_number == True:
+    response = input("Would you like to fix a" + another_one + "digit?  ")
+    another_one = "nother "
+    if response == "Yes" or response == "yes":
+        number = input("What digit would you like?  ")
+        if number.strip().isdigit():
+            if int(number) in range(0,10):
+                position = input("Which position is this for?  ")
+                if position.strip().isdigit():
+                    if int(position) in range(1,5):
+                        digit_list[int(position) - 1] = int(number)
+                        if int(position) == 1:   
+                            print("Success! Your " + position + "st digit is " + number + "!")
+                        
+                        if int(position) == 2:   
+                            print("Success! Your " + position + "nd digit is " + number + "!")
+                        
+                        if int(position) == 3:   
+                            print("Success! Your " + position + "rd digit is " + number + "!")
+                        
+                        if int(position) == 4:   
+                            print("Success! Your " + position + "th digit is " + number + "!")
+                    else:
+                        print("Please enter a valid position! Try again!  ")
+                        continue
+                else:
+                    print("Please enter a valid position! Try again!  ")
+                    continue
+            else:
+                print("Please enter a valid number!  ")
+                continue
+
+
+        else:
+            print("Please enter a valid number!  ")
+            continue
+    elif response == "No" or response == "no":
+        break
+    else:
+        print("I'm sorry. I didn't understand that! Please answer with Yes/No. Thank you!")
+        continue
+
+pos = 0
+for i in digit_list:
+    if i == -1:
+        random_num = random.randint(0,9)
+        digit_list[pos] = str(random_num)
+    else:
+        digit_list[pos] = str(i)
+    pos += 1
+
+num = "".join(digit_list)
+
+print("Here you go! Your lucky 4D number of the day is " + num + "!")
+
+
+
+        
+        
