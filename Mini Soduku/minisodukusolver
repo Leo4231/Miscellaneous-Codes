@@ -1,0 +1,110 @@
+#The rules of (mini) soduku
+#It is played on a 4x4 board. All row, column and 2x2 grid can only contain a single digit once without repititions
+#See sample image for game instruction.
+#Digits are inserted into the code board row by row
+#If a digit is given, input the digit, else, input it as 0.
+#Try it out, using the sample boards, or by creating your own board.
+#To execute, simply print out by calling the function. e.g. print(fill_board(board1))
+#Have fun!
+
+#Specifications
+SIZE = 4
+board1 = [[0, 0, 0, 0], [0, 1, 2, 4], [0, 3, 4, 1], [0, 4, 0, 2]]
+board2 = [[1, 0, 3, 0], [3, 0, 0, 2], [4, 3, 2, 1], [0, 0, 0, 3]]
+board3 = [[0, 1, 3, 2], [2, 0, 1, 0], [1, 0, 0, 3], [3, 4, 2, 1]]
+
+
+#Fill Rows
+
+def fill_row(board):
+    num_set = {1,2,3,4}
+    fill_counter = 0
+    for y in range(4):
+        for x in range(4):
+            raw_row_set = set(board[y])
+            temp_set = raw_row_set.intersection(num_set)
+            raw_row_list = board[y]
+            if board[y][x] == 0:
+                if raw_row_list.count(0) == 1:
+                    val = (num_set - raw_row_set)
+                    board[y][x] = int(list(val)[0])
+                    fill_counter += 1
+    if fill_counter == 0:
+        return False
+    return True
+
+#Fill Columns
+
+def fill_col(board):
+    num_set = {1,2,3,4}
+    fill_counter = 0
+    for x in range(4):
+        for y in range(4):
+            raw_col_list = [row[x] for row in board]
+            raw_col_set = set(raw_col_list)
+            temp_set = raw_col_set.intersection(num_set)
+            if board[y][x] == 0:
+                if raw_col_list.count(0) == 1:
+                    val = (num_set - temp_set)
+                    board[y][x] = int(list(val)[0])
+                    fill_counter += 1
+    if fill_counter == 0:
+        return False
+    return True
+
+#Fill Sections
+
+def fill_section(board):
+    num_set = {1,2,3,4}
+    fill_counter = 0
+    for box_x in range(2):
+        for box_y in range(2):
+            raw_box_lst = []
+            
+            for x in range(4):
+                for y in range(4):
+                    if x//2 == box_x:
+                        if y//2 == box_y:
+                            raw_box_lst.append(board[y][x])
+            raw_box_set = set(raw_box_lst)
+            temp_set = raw_box_set.intersection(num_set)
+            for x in range(4):
+                for y in range(4):
+                    if x//2 == box_x:
+                        if y//2 == box_y:
+                            if board[y][x] == 0:
+                                if raw_box_lst.count(0) == 1:
+                                    val = (num_set - temp_set)
+                                    board[y][x] = int(list(val)[0])
+                                    fill_counter += 1
+    if fill_counter == 0:
+        return False
+    return True
+
+#Solve the board
+
+def fill_board(board):
+    fillable = True
+    while fillable == True:
+        fill_row(board)
+        fill_col(board)
+        fill_section(board)
+        flat_board = flatten(board)
+        counter = flat_board.count(0)
+        if counter == 0:
+            break
+    return board
+
+def flatten(seq):
+    if seq == []:
+        return seq
+    elif type(seq) != list:
+        return [seq]
+    else:
+        return flatten(seq[0])+flatten(seq[1:])
+
+
+
+    
+
+
