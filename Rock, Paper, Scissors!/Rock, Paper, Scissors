@@ -1,0 +1,95 @@
+#Python remake of the classic rock, paper, scissors
+#No rules needed to be explained. Just input rock, paper or scissors!
+
+import random, time
+
+rounds = int(input("How many rounds should we play? Plase input a number:  ")) - 1
+games_played = 0
+choices = ["rock", "paper", "scissors"]
+scoreboard = []
+
+def computer_choose():
+    return (random.choice(choices))
+
+#1 is draw, 2 is player winner, 3 is computer winner
+def outcome(computer_choice, enemy_choice):
+    if enemy_choice == computer_choice:
+        return 1
+    elif enemy_choice == "rock" and computer_choice == "scissors":
+        return 2
+    elif enemy_choice == "paper" and computer_choice == "rock":
+        return 2
+    elif enemy_choice == "scissors" and computer_choice == "paper":
+        return 2
+    else:
+        return 3
+
+print("--------Let the games begin!---------")
+        
+while games_played <= rounds:
+    print("---------------Round" + str(games_played + 1) + "----------------")
+    enemy_choice = input("Rock, paper or scissors?  ")
+    if not enemy_choice in choices:
+        print("Please choose one of the three options!  ")
+        continue
+    computer_choice = computer_choose()
+    time.sleep(0.5)
+    print("I have decided to choose " + computer_choice + "!")
+    time.sleep(0.5)
+    if outcome(computer_choice, enemy_choice) == 1:
+        if games_played == rounds:
+            print("It's a draw! Time to calculate the results!")
+        else:
+            print("It's a draw! Time for the next round!")
+        scoreboard.append("D")
+        games_played += 1
+    elif outcome(computer_choice, enemy_choice) == 2:
+        if games_played == rounds:
+            print("You've won! Time to calculate the results!")
+        else:
+            print("You've won! But I believe I will win in the end, let's go!")
+        scoreboard.append("W")
+        games_played += 1
+    elif outcome(computer_choice, enemy_choice) == 3:
+        if games_played == rounds:
+            print("I've won! Time to calculate the results!")
+        else:
+            print("I've won! better luck next round, let's go!")
+        scoreboard.append("L")
+        games_played += 1
+    time.sleep(1)
+
+draws = 0
+wins = 0
+loss = 0
+for result in scoreboard:
+    if result == "D":
+        draws += 1
+    elif result == "W":
+        wins += 1
+    elif result == "L":
+        loss += 1
+
+print("-------------------------------------")
+print("Let's calculate the results of the match!")
+time.sleep(1)
+print("******Drumroll please******")
+time.sleep(1.5)
+
+if wins == loss:
+    print("It's a draw! Good game!")
+elif wins < loss:
+    print("I have won! Better luck next time!")
+elif wins > loss:
+    print("You have won! Congratulations!")
+time.sleep(0.5)
+print("-------------------------------------")
+print("Here are the statistics of the match:")
+print("Number of draws: " + str(draws))
+print("Number of wins: " + str(wins))
+print("Number of losses: " + str(loss))
+
+
+
+        
+        
